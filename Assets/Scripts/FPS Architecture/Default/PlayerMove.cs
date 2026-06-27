@@ -63,9 +63,9 @@ public class PlayerMove : MonoBehaviour
 
     private void HandleCrouch()
     {
-        Debug.Log(input == null);
-        Debug.Log(controller == null);
-        Debug.Log(settings == null);
+        //Debug.Log(input == null);
+        //Debug.Log(controller == null);
+        //Debug.Log(settings == null);
 
         if (input.CrouchHeld)
         {
