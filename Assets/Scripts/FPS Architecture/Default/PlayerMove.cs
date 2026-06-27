@@ -7,17 +7,20 @@ public class PlayerMove : MonoBehaviour
     private PlayerManager playerManager;
     private PlayerInput input;
     private CharacterController controller;
+    private float targetHeight;
 
     private float verticalVelocity;
     private bool isCrouching;
 
   
+
     private void Update()
     {
         HandleCrouch();
         HandleGravity();
         HandleJump();
         HandleMovement();
+        UpdateControllerHeight();
     }
 
     private void HandleMovement()
@@ -63,20 +66,21 @@ public class PlayerMove : MonoBehaviour
 
     private void HandleCrouch()
     {
-        //Debug.Log(input == null);
-        //Debug.Log(controller == null);
-        //Debug.Log(settings == null);
-
         if (input.CrouchHeld)
         {
             isCrouching = true;
-            controller.height = settings.CrouchingHeight;
+            targetHeight = settings.CrouchingHeight;
+            playerManager.Camera.SetCrouch(true);
+            return;
         }
-        else
-        {
-            isCrouching = false;
-            controller.height = settings.StandingHeight;
-        }
+
+        if (!CanStandUp())
+            return;
+
+        isCrouching = false;
+        targetHeight = settings.StandingHeight;
+
+        playerManager.Camera.SetCrouch(false);
     }
 
     public void Initialize(PlayerManager manager)
@@ -85,6 +89,32 @@ public class PlayerMove : MonoBehaviour
 
         input = manager.Input;
         controller = manager.Controller;
+        targetHeight = settings.StandingHeight;
+    }
+      
+
+    private void UpdateControllerHeight()
+    {
+        controller.height = Mathf.Lerp(
+            controller.height,
+            targetHeight,
+            settings.HeightLerpSpeed * Time.deltaTime);
+
+        controller.center = Vector3.up * controller.height * 0.5f;
+    }
+
+    private bool CanStandUp()
+    {
+        float radius = controller.radius;
+
+        Vector3 bottom = transform.position + Vector3.up * radius;
+        Vector3 top = transform.position + Vector3.up * (settings.StandingHeight - radius);
+
+        return !Physics.CheckCapsule(
+            bottom,
+            top,
+            radius,
+            settings.GroundLayer);
     }
 
 }

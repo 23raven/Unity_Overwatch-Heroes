@@ -4,6 +4,11 @@ public class PlayerCamera : MonoBehaviour
 {
     [SerializeField] private Transform cameraHandle;
     [SerializeField] private float sensitivity = 150f;
+    [SerializeField] private float standingCameraHeight = 2.0f;
+    [SerializeField] private float crouchingCameraHeight = 0.3f;
+    [SerializeField] private float cameraLerpSpeed = 12f;
+
+    private float targetCameraHeight;
 
     private PlayerManager playerManager;
 
@@ -15,10 +20,13 @@ public class PlayerCamera : MonoBehaviour
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        targetCameraHeight = standingCameraHeight;
     }
 
     private void Update()
     {
+        UpdateCameraHeight();
         Look();
     }
 
@@ -36,4 +44,24 @@ public class PlayerCamera : MonoBehaviour
 
         transform.Rotate(Vector3.up * mouseX);
     }
+
+    public void SetCrouch(bool crouching)
+    {
+        targetCameraHeight = crouching
+            ? crouchingCameraHeight
+            : standingCameraHeight;
+    }
+
+    private void UpdateCameraHeight()
+    {
+        Vector3 localPos = cameraHandle.localPosition;
+
+        localPos.y = Mathf.Lerp(
+            localPos.y,
+            targetCameraHeight,
+            cameraLerpSpeed * Time.deltaTime);
+
+        cameraHandle.localPosition = localPos;
+    }
+
 }

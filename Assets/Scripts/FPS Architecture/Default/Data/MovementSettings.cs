@@ -14,6 +14,12 @@ public class MovementSettings : ScriptableObject
 
     [Header("Crouch")]
     public float CrouchSpeed = 2.5f;
+
     public float StandingHeight = 2f;
     public float CrouchingHeight = 1f;
+
+    public float HeightLerpSpeed = 12f;
+
+    public LayerMask GroundLayer;
+
 }
