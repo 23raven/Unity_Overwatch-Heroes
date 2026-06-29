@@ -1,10 +1,12 @@
 using UnityEngine;
+using System;
 
 public class Health : MonoBehaviour, IDamageable
 {
     [SerializeField] private float maxHealth = 100f;
 
     public float CurrentHealth { get; private set; }
+    public event Action OnDeath;
 
     private void Awake()
     {
@@ -29,6 +31,7 @@ public class Health : MonoBehaviour, IDamageable
 
     private void Die()
     {
-        Debug.Log($"{name} died.");
+        OnDeath?.Invoke();
     }
+
 }
