@@ -8,9 +8,9 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Value",
+                    "type": "Button",
                     "id": "b4d910a0-212d-483c-a82b-f041bbad5f25",
-                    "expectedControlType": "Vector2",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": true
@@ -55,6 +55,15 @@
                     "name": "Fire",
                     "type": "Button",
                     "id": "9043cd62-f1ac-429b-a645-1d369f520f7a",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Reload",
+                    "type": "Button",
+                    "id": "82640e4f-b74b-4bd6-b17c-7699a6ba052a",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -169,6 +178,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Fire",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "df48173d-9a77-4e8f-9082-4b64facdb8fa",
+                    "path": "<Keyboard>/r",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Reload",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

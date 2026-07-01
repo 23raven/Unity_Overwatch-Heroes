@@ -7,7 +7,6 @@ public class PlayerShoot : MonoBehaviour
 
     public void Initialize(PlayerManager manager)
     {
-        Debug.Log("PlayerShoot.Initialize");
         playerManager = manager;
         weaponHolder = manager.WeaponHolder;
     }
@@ -15,6 +14,7 @@ public class PlayerShoot : MonoBehaviour
     private void Update()
     {
         HandleShoot();
+        HandleReload();
     }
 
     private void HandleShoot()
@@ -23,5 +23,13 @@ public class PlayerShoot : MonoBehaviour
             return;
 
         weaponHolder.CurrentWeapon.Shoot();
+    }
+
+    private void HandleReload()
+    {
+        if (!playerManager.Input.ReloadPressed)
+            return;
+
+        weaponHolder.CurrentWeapon.Reload();
     }
 }

@@ -17,6 +17,8 @@ public class PlayerInput : MonoBehaviour
 
     public bool FireHeld => inputActions.Player.Fire.IsPressed();
 
+    public bool ReloadPressed => inputActions.Player.Reload.WasPressedThisFrame();
+
     private void Awake()
     {
         inputActions = new PlayerInputActions();

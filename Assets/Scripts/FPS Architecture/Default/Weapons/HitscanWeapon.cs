@@ -10,6 +10,9 @@ public class HitscanWeapon : Weapon
 
     public override void Shoot()
     {
+        if (!HasAmmo())
+            return;
+
         if (!CanShoot())
             return;
 
@@ -19,6 +22,8 @@ public class HitscanWeapon : Weapon
 
         if (!Physics.Raycast(ray, out RaycastHit hit, range))
             return;
+
+        ConsumeAmmo();
 
         PlayMuzzleFlash();
         PlayImpactEffect(hit);
@@ -37,7 +42,6 @@ public class HitscanWeapon : Weapon
 
     private void PlayMuzzleFlash()
     {
-        Debug.Log("Muzzle Flash");
 
         if (muzzleFlash == null)
         {
