@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class PlayerMove : MonoBehaviour
 {
-    [SerializeField] private MovementSettings settings;
+    private MovementSettings settings;
 
     private PlayerManager playerManager;
     private PlayerInput input;
@@ -115,6 +115,11 @@ public class PlayerMove : MonoBehaviour
             top,
             radius,
             settings.GroundLayer);
+    }
+
+    public void SetMovementSettings(MovementSettings settings)
+    {
+        this.settings = settings;
     }
 
 }

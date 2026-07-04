@@ -80,4 +80,9 @@ public abstract class Weapon : MonoBehaviour
         Debug.Log($"Reload complete: {CurrentAmmo}/{MagazineSize}");
     }
 
+    public void SetWeaponData(WeaponData data)
+    {
+        this.data = data;
+    }
+
 }
