@@ -3,19 +3,32 @@ using UnityEngine;
 public class AbilitySlot
 {
     public HeroAbility Ability { get; private set; }
-
+    public int CurrentCharges => currentCharges;
+    public int MaxCharges => Data == null ? 0 : Data.MaxCharges;
+    public bool IsReady => currentCharges > 0;
     private int currentCharges;
-    private float cooldownTimer;
+    private float rechargeTimer;
+    public float RechargeProgress =>
+    Data == null || MaxCharges == CurrentCharges
+        ? 1f
+        : rechargeTimer / Data.Cooldown;
+    public float RechargeRemaining =>
+    Mathf.Max(0f, Data.Cooldown - rechargeTimer);
+
+    private AbilityData Data => Ability?.GetData();
 
     public void SetAbility(HeroAbility ability)
     {
         Ability = ability;
 
-        if (Ability == null)
+        if (Data == null)
+        {
+            Debug.LogError($"{ability?.name} has no AbilityData assigned!");
             return;
+        }
 
-        currentCharges = Ability.GetData().MaxCharges;
-        cooldownTimer = 0f;
+        currentCharges = Data.MaxCharges;
+        rechargeTimer = 0f;
     }
 
     public void Initialize(PlayerManager player)
@@ -32,9 +45,6 @@ public class AbilitySlot
 
     public void Activate(PlayerManager player)
     {
-        if (Ability == null)
-            return;
-
         if (!CanActivate())
             return;
 
@@ -45,18 +55,45 @@ public class AbilitySlot
 
     private bool CanActivate()
     {
-        return currentCharges > 0;
+        if (Ability == null)
+            return false;
+
+        if (Data == null)
+            return false;
+
+        if (!IsReady)
+            return false;
+
+        return true;
     }
 
     private void ConsumeCharge()
     {
         currentCharges--;
 
-        Debug.Log($"{Ability.name}: {currentCharges}/{Ability.GetData().MaxCharges}");
+        Debug.Log($"{Ability.name}: {currentCharges}/{MaxCharges}");
     }
 
     private void UpdateCooldown()
     {
+        if (Data == null)
+            return;
 
+        if (currentCharges >= Data.MaxCharges)
+        {
+            rechargeTimer = 0f;
+            return;
+        }
+
+        rechargeTimer += Time.deltaTime;
+
+        if (rechargeTimer < Data.Cooldown)
+            return;
+
+        currentCharges++;
+
+        rechargeTimer = 0f;
+
+        Debug.Log($"{Ability.name}: {currentCharges}/{MaxCharges}");
     }
 }
