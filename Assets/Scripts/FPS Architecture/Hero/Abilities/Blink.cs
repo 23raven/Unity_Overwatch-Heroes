@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "Hero/Abilities/Blink")]
 public class Blink : HeroAbility
 {
-    [SerializeField] private float distance = 7f;
+    [SerializeField] private BlinkData data;
 
     public override void Activate(PlayerManager player)
     {
@@ -12,8 +12,12 @@ public class Blink : HeroAbility
         controller.enabled = false;
 
         player.transform.position +=
-            player.transform.forward * distance;
+            player.transform.forward * data.Distance;
 
         controller.enabled = true;
+    }
+    public override AbilityData GetData()
+    {
+        return data;
     }
 }

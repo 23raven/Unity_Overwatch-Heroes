@@ -9,7 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ddd04541069143b499b8b979471a338c, type: 3}
-  m_Name: Blink
-  m_EditorClassIdentifier: Assembly-CSharp::Blink
-  data: {fileID: 11400000, guid: b3bc910da6cb949478e323207260889a, type: 2}
+  m_Script: {fileID: 11500000, guid: 5f6d08285b52a1c4497258fe1a99291d, type: 3}
+  m_Name: BlinkData
+  m_EditorClassIdentifier: Assembly-CSharp::BlinkData
+  Cooldown: 3
+  MaxCharges: 3
+  Distance: 6

@@ -87,7 +87,7 @@ public class PlayerMove : MonoBehaviour
     public void Initialize(PlayerManager manager)
     {
         playerManager = manager;
-        settings = manager.Hero.CurrentHero.Movement;
+        settings = manager.Movement;
         input = manager.Input;
         controller = manager.Controller;
         targetHeight = settings.StandingHeight;

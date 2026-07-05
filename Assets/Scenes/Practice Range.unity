@@ -9316,6 +9316,8 @@ GameObject:
   - component: {fileID: 1158085382}
   - component: {fileID: 1158085381}
   - component: {fileID: 1158085384}
+  - component: {fileID: 1158085385}
+  - component: {fileID: 1158085386}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -9389,7 +9391,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c310f2762829feb41a90b71585be6b76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerMove
-  settings: {fileID: 11400000, guid: 1f1ff6d3162041346a32f2feca9ea6a7, type: 2}
 --- !u!114 &1158085382
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9431,6 +9432,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1d42a7ed7c0a61349a11fd3894b3ca6e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerShoot
+--- !u!114 &1158085385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158085376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb7e5484502eeb34dba640672f4942d3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::HeroManager
+  currentHero: {fileID: 11400000, guid: 9c0a396debdb30f438d6c5232b1eaec6, type: 2}
+--- !u!114 &1158085386
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1158085376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5b2985e891195a145b51fb62a7f0e966, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::AbilitySystem
 --- !u!1 &1391696388
 GameObject:
   m_ObjectHideFlags: 0

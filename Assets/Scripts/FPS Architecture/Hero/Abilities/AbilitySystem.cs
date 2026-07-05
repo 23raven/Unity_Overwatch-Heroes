@@ -3,16 +3,31 @@ using UnityEngine;
 public class AbilitySystem : MonoBehaviour
 {
     private PlayerManager playerManager;
-    private HeroManager heroManager;
 
+    private AbilitySlot shiftSlot = new();
+    private AbilitySlot eSlot = new();
+    private AbilitySlot ultimateSlot = new();
     public void Initialize(PlayerManager manager)
     {
         playerManager = manager;
-        heroManager = manager.Hero;
+
+        shiftSlot.SetAbility(playerManager.CurrentHero.ShiftAbility);
+
+        eSlot.SetAbility(playerManager.CurrentHero.EAbility);
+
+        ultimateSlot.SetAbility(playerManager.CurrentHero.UltimateAbility);
+
+        shiftSlot.Initialize(playerManager);
+        eSlot.Initialize(playerManager);
+        ultimateSlot.Initialize(playerManager);
     }
 
     private void Update()
     {
+        shiftSlot.Tick(playerManager);
+        eSlot.Tick(playerManager);
+        ultimateSlot.Tick(playerManager);
+
         HandleShift();
         HandleE();
         HandleUltimate();
@@ -23,10 +38,7 @@ public class AbilitySystem : MonoBehaviour
         if (!playerManager.Input.ShiftPressed)
             return;
 
-        if (heroManager.CurrentHero.ShiftAbility == null)
-            return;
-
-        heroManager.CurrentHero.ShiftAbility.Activate(playerManager);
+        shiftSlot.Activate(playerManager);
     }
 
     private void HandleE()
@@ -34,10 +46,7 @@ public class AbilitySystem : MonoBehaviour
         if (!playerManager.Input.EPressed)
             return;
 
-        if (heroManager.CurrentHero.EAbility == null)
-            return;
-
-        heroManager.CurrentHero.EAbility.Activate(playerManager);
+        eSlot.Activate(playerManager);
     }
 
     private void HandleUltimate()
@@ -45,9 +54,6 @@ public class AbilitySystem : MonoBehaviour
         if (!playerManager.Input.UltimatePressed)
             return;
 
-        if (heroManager.CurrentHero.UltimateAbility == null)
-            return;
-
-        heroManager.CurrentHero.UltimateAbility.Activate(playerManager);
+        ultimateSlot.Activate(playerManager);
     }
 }
