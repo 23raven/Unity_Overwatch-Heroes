@@ -16,6 +16,7 @@ public class AbilitySlot
     Mathf.Max(0f, Data.Cooldown - rechargeTimer);
 
     private AbilityData Data => Ability?.GetData();
+    public System.Action<HeroAbility> OnAbilityActivated;
 
     public void SetAbility(HeroAbility ability)
     {
@@ -51,6 +52,7 @@ public class AbilitySlot
         Ability.Activate(player);
 
         ConsumeCharge();
+        OnAbilityActivated?.Invoke(Ability);
     }
 
     private bool CanActivate()
@@ -95,5 +97,10 @@ public class AbilitySlot
         rechargeTimer = 0f;
 
         Debug.Log($"{Ability.name}: {currentCharges}/{MaxCharges}");
+    }
+
+    public void Deactivate(PlayerManager player)
+    {
+        Ability?.Deactivate(player);
     }
 }

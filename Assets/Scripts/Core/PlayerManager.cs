@@ -14,6 +14,8 @@ public class PlayerManager : MonoBehaviour
     public MovementSettings Movement => Hero.Movement;
     public WeaponData Weapon => Hero.Weapon;
 
+    public HistorySystem HistorySystem { get; private set; }
+
     private void Awake()
     {
         Debug.Log("PlayerManager.isAwaking");
@@ -42,5 +44,6 @@ public class PlayerManager : MonoBehaviour
         Shoot.Initialize(this);
 
         AbilitySystem.Initialize(this);
+        HistorySystem = GetComponent<HistorySystem>();
     }
 }

@@ -47,4 +47,5 @@ public class PlayerInput : MonoBehaviour
         Look = inputActions.Player.Look.ReadValue<Vector2>();
     }
 
+
 }

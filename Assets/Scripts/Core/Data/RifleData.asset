@@ -12,10 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1efc7f9cdc663c344b40d98ec45b8563, type: 3}
   m_Name: RifleData
   m_EditorClassIdentifier: Assembly-CSharp::WeaponData
-  Damage: 20
-  Range: 100
-  Spread: 0.005
-  FireMode: 0
-  FireRate: 10
-  MagazineSize: 30
-  ReloadTime: 1.5
+  damage: 20
+  range: 100
+  spread: 0.005
+  fireMode: 1
+  fireRate: 10
+  magazineSize: 30
+  reloadTime: 1.5

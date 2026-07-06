@@ -7,6 +7,6 @@ public abstract class HeroAbility : ScriptableObject
     public virtual void Tick(PlayerManager player) { }
 
     public abstract void Activate(PlayerManager player);
-
+    public virtual void Deactivate(PlayerManager player) { }
     public abstract AbilityData GetData();
 }
