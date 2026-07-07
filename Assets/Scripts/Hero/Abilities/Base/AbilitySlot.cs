@@ -17,9 +17,13 @@ public class AbilitySlot
 
     private AbilityData Data => Ability?.GetData();
     public System.Action<HeroAbility> OnAbilityActivated;
+    public AbilitySlotType SlotType { get; private set; }
 
-    public void SetAbility(HeroAbility ability)
+    public void SetAbility(
+    AbilitySlotType slotType,
+    HeroAbility ability)
     {
+        SlotType = slotType;
         Ability = ability;
 
         if (Data == null)

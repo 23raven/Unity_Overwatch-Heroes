@@ -16,5 +16,5 @@ MonoBehaviour:
   Weapon: {fileID: 11400000, guid: 99270e018f6d40f4d9d3b3fe4dfc306b, type: 2}
   PassiveAbility: {fileID: 0}
   ShiftAbility: {fileID: 11400000, guid: dd947469cf9cf0642b254f4c26c0c0b4, type: 2}
-  EAbility: {fileID: 0}
+  EAbility: {fileID: 11400000, guid: c88bfe2dd1ed5474bad4f5274b615c79, type: 2}
   UltimateAbility: {fileID: 0}

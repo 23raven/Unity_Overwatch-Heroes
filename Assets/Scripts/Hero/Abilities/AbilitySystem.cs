@@ -11,11 +11,17 @@ public class AbilitySystem : MonoBehaviour
     {
         playerManager = manager;
 
-        shiftSlot.SetAbility(playerManager.CurrentHero.ShiftAbility);
+        shiftSlot.SetAbility(
+            AbilitySlotType.Shift,
+            playerManager.Hero.ShiftAbility);
 
-        eSlot.SetAbility(playerManager.CurrentHero.EAbility);
+        eSlot.SetAbility(
+            AbilitySlotType.E,
+            playerManager.Hero.EAbility);
 
-        ultimateSlot.SetAbility(playerManager.CurrentHero.UltimateAbility);
+        ultimateSlot.SetAbility(
+            AbilitySlotType.Ultimate,
+            playerManager.Hero.UltimateAbility);
 
         shiftSlot.Initialize(playerManager);
         eSlot.Initialize(playerManager);

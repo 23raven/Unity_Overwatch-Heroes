@@ -7,13 +7,16 @@ public class Recall : HeroAbility
 
     public override void Activate(PlayerManager player)
     {
-        HistorySystem recorder =
+        HistorySystem history =
             player.GetComponent<HistorySystem>();
 
-        if (recorder == null)
+        if (history == null)
             return;
 
-        recorder.Restore(player);
+        HistorySnapshot snapshot =
+            history.GetOldestSnapshot();
+
+        snapshot.Apply(player);
     }
 
     public override AbilityData GetData()

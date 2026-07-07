@@ -15,4 +15,16 @@ public struct HistorySnapshot
         Rotation = rotation;
         Health = health;
     }
+
+    public void Apply(PlayerManager player)
+    {
+        CharacterController controller = player.Controller;
+
+        controller.enabled = false;
+
+        player.transform.position = Position;
+        player.transform.rotation = Rotation;
+
+        controller.enabled = true;
+    }
 }
