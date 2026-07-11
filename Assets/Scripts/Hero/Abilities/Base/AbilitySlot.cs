@@ -18,6 +18,7 @@ public class AbilitySlot
     private AbilityData Data => Ability?.GetData();
     public System.Action<HeroAbility> OnAbilityActivated;
     public AbilitySlotType SlotType { get; private set; }
+    public bool IsActive { get; private set; }
 
     public void SetAbility(
     AbilitySlotType slotType,

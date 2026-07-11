@@ -26,5 +26,7 @@ public struct HistorySnapshot
         player.transform.rotation = Rotation;
 
         controller.enabled = true;
+
+        player.Health.SetHealth(Health);
     }
 }
