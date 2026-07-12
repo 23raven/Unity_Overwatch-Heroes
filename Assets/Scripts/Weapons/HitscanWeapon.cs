@@ -35,7 +35,11 @@ public class HitscanWeapon : Weapon
         if (damageable == null)
             return;
 
-        damageable.TakeDamage(data.damage);
+        DamageInfo damageInfo = new DamageInfo(
+    data.damage,
+    playerManager);
+
+        damageable.TakeDamage(damageInfo);
     }
 
     private void PlayMuzzleFlash()

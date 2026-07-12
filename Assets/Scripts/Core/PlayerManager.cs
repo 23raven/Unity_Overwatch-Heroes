@@ -13,12 +13,15 @@ public class PlayerManager : MonoBehaviour
     public HeroDefinition CurrentHero => Hero.CurrentHero;
     public MovementSettings Movement => Hero.Movement;
     public WeaponData Weapon => Hero.Weapon;
-
     public HistorySystem HistorySystem { get; private set; }
+    public Health Health { get; private set; }
+
+    public UltimateCharge UltimateCharge { get; private set; }
 
     private void Awake()
     {
         Debug.Log("PlayerManager.isAwaking");
+
         Input = GetComponent<PlayerInput>();
 
         Move = GetComponent<PlayerMove>();
@@ -34,6 +37,12 @@ public class PlayerManager : MonoBehaviour
         Hero = GetComponent<HeroManager>();
 
         AbilitySystem = GetComponent<AbilitySystem>();
+        
+        Health = GetComponent<Health>();
+
+        HistorySystem = GetComponent<HistorySystem>();
+
+        UltimateCharge = GetComponent<UltimateCharge>();
 
         Move.Initialize(this);
 
@@ -44,6 +53,6 @@ public class PlayerManager : MonoBehaviour
         Shoot.Initialize(this);
 
         AbilitySystem.Initialize(this);
-        HistorySystem = GetComponent<HistorySystem>();
+
     }
 }

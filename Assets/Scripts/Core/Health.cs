@@ -13,9 +13,11 @@ public class Health : MonoBehaviour, IDamageable
         CurrentHealth = maxHealth;
     }
 
-    public void TakeDamage(float damage)
+    public void TakeDamage(DamageInfo damageInfo)
     {
-        CurrentHealth -= damage;
+        CurrentHealth -= damageInfo.Damage;
+
+        damageInfo.Attacker?.UltimateCharge.Add(damageInfo.Damage);
 
         if (CurrentHealth <= 0)
         {
@@ -32,6 +34,16 @@ public class Health : MonoBehaviour, IDamageable
     private void Die()
     {
         OnDeath?.Invoke();
+    }
+
+    public void SetHealth(float health)
+    {
+        CurrentHealth = Mathf.Clamp(health, 0f, maxHealth);
+
+        if (CurrentHealth <= 0)
+        {
+            Die();
+        }
     }
 
 }
