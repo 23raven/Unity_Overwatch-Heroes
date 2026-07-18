@@ -9,6 +9,13 @@ public class PlayerShoot : MonoBehaviour
     {
         playerManager = manager;
         weaponHolder = manager.WeaponHolder;
+
+        weaponHolder.CurrentWeapon.Shot += OnWeaponShot;
+    }
+
+    private void OnWeaponShot()
+    {
+        playerManager.AudioManager.PlayShoot();
     }
 
     private void Update()
@@ -19,7 +26,11 @@ public class PlayerShoot : MonoBehaviour
 
     private void HandleShoot()
     {
-        if (!weaponHolder.CurrentWeapon.WantsToShoot(playerManager.Input))
+        bool wantsToShoot = weaponHolder.CurrentWeapon.WantsToShoot(playerManager.Input);
+
+        HandleShootAudio(wantsToShoot);
+
+        if (!wantsToShoot)
             return;
 
         weaponHolder.CurrentWeapon.Shoot();
@@ -31,5 +42,11 @@ public class PlayerShoot : MonoBehaviour
             return;
 
         weaponHolder.CurrentWeapon.Reload();
+    }
+
+    private void HandleShootAudio(bool wantsToShoot)
+    {
+        if (!wantsToShoot)
+            playerManager.AudioManager.StopShoot();
     }
 }

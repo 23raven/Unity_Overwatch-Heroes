@@ -1,5 +1,7 @@
 using UnityEngine;
 using System.Collections;
+using System;
+
 
 public abstract class Weapon : MonoBehaviour
 {
@@ -13,8 +15,10 @@ public abstract class Weapon : MonoBehaviour
 
     public int CurrentAmmo => currentAmmo;
     public int MagazineSize => data.magazineSize;
+    
+    public event Action Shot;
 
-    public virtual void Initialize(PlayerManager manager)
+public virtual void Initialize(PlayerManager manager)
     {
         playerManager = manager;
         currentAmmo = data.magazineSize;
@@ -84,6 +88,11 @@ public abstract class Weapon : MonoBehaviour
     public void SetWeaponData(WeaponData data)
     {
         this.data = data;
+    }
+
+    protected void InvokeShot()
+    {
+        Shot?.Invoke();
     }
 
 }

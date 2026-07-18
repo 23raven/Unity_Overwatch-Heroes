@@ -27,6 +27,7 @@ public class HitscanWeapon : Weapon
         PlayMuzzleFlash();
         PlayImpactEffect(hit);
         DealDamage(hit);
+        InvokeShot();
     }
 
     private void DealDamage(RaycastHit hit)

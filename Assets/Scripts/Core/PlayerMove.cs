@@ -11,9 +11,10 @@ public class PlayerMove : MonoBehaviour
 
     private float verticalVelocity;
     private bool isCrouching;
+    private float footstepTimer;
+    [SerializeField] private float footstepInterval = 0f;
 
 
-  
 
     private void Update()
     {
@@ -42,7 +43,10 @@ public class PlayerMove : MonoBehaviour
         velocity.y = verticalVelocity;
 
         controller.Move(velocity * Time.deltaTime);
+
     }
+
+    
 
     private void HandleGravity()
     {
