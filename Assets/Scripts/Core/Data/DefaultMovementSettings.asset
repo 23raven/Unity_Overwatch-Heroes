@@ -19,6 +19,9 @@ MonoBehaviour:
   StandingHeight: 2
   CrouchingHeight: 1
   HeightLerpSpeed: 12
+  acceleration: 24
+  deceleration: 8
   GroundLayer:
     serializedVersion: 2
     m_Bits: 64
+  movementSmoothTime: 0.05

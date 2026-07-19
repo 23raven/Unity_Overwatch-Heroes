@@ -7,14 +7,18 @@ public class PlayerMove : MonoBehaviour
     private PlayerManager playerManager;
     private PlayerInput input;
     private CharacterController controller;
+
     private float targetHeight;
 
     private float verticalVelocity;
     private bool isCrouching;
-    private float footstepTimer;
+
+    private Vector3 currentVelocity;
+
     [SerializeField] private float footstepInterval = 0f;
 
 
+    private Vector3 movementVelocity;
 
     private void Update()
     {
@@ -24,12 +28,10 @@ public class PlayerMove : MonoBehaviour
         HandleMovement();
         HandleFootstep();
         UpdateControllerHeight();
-
     }
 
     private void HandleMovement()
     {
-
         Vector2 moveInput = input.Move;
 
         Vector3 moveDirection =
@@ -42,21 +44,24 @@ public class PlayerMove : MonoBehaviour
             ? settings.CrouchSpeed
             : settings.MoveSpeed;
 
-        Vector3 velocity = moveDirection * moveSpeed;
+        Vector3 targetVelocity = moveDirection * moveSpeed;
+
+        currentVelocity = Vector3.SmoothDamp(
+            currentVelocity,
+            targetVelocity,
+            ref movementVelocity,
+            settings.MovementSmoothTime);
+
+        Vector3 velocity = currentVelocity;
         velocity.y = verticalVelocity;
 
         controller.Move(velocity * Time.deltaTime);
-
     }
-
-    
 
     private void HandleGravity()
     {
         if (controller.isGrounded && verticalVelocity < 0)
-        {
             verticalVelocity = -2f;
-        }
 
         verticalVelocity += settings.Gravity * Time.deltaTime;
     }
@@ -97,9 +102,9 @@ public class PlayerMove : MonoBehaviour
         settings = manager.Movement;
         input = manager.Input;
         controller = manager.Controller;
+
         targetHeight = settings.StandingHeight;
     }
-      
 
     private void UpdateControllerHeight()
     {
@@ -134,12 +139,11 @@ public class PlayerMove : MonoBehaviour
     {
         bool isWalking =
             controller.isGrounded &&
-            input.Move.sqrMagnitude > 0.01f;
+            currentVelocity.sqrMagnitude > 0.05f;
 
         if (isWalking)
             playerManager.AudioManager.PlayFootstep();
         else
             playerManager.AudioManager.StopFootstep();
     }
-
 }

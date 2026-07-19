@@ -22,4 +22,7 @@ public class MovementSettings : ScriptableObject
 
     public LayerMask GroundLayer;
 
+    [SerializeField] private float movementSmoothTime = 0.2f;
+    public float MovementSmoothTime => movementSmoothTime;
+
 }

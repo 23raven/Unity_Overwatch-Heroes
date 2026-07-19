@@ -6,6 +6,7 @@ public class HistorySystem : MonoBehaviour
 {
     private const float RecordInterval = 0.016f;
     private const float MaxRecordTime = 3f;
+    private const float RecallDuration = 1.2f;
 
     private readonly List<HistorySnapshot> history = new();
 
@@ -60,19 +61,20 @@ public class HistorySystem : MonoBehaviour
 
     private IEnumerator RecallRoutine()
     {
-
         isRecalling = true;
-
-        if (player.RecallParticles != null)
-            player.RecallParticles.Play();
 
         PlayerInput input = player.GetComponent<PlayerInput>();
 
         if (input != null)
             input.enabled = false;
 
+        if (player.RecallParticles != null)
+            player.RecallParticles.Play();
+
         CharacterController controller = player.Controller;
         controller.enabled = false;
+
+        float stepDuration = RecallDuration / (history.Count - 1);
 
         for (int i = history.Count - 1; i > 0; i--)
         {
@@ -81,9 +83,9 @@ public class HistorySystem : MonoBehaviour
 
             float elapsed = 0f;
 
-            while (elapsed < RecordInterval)
+            while (elapsed < stepDuration)
             {
-                float t = elapsed / RecordInterval;
+                float t = elapsed / stepDuration;
 
                 player.transform.position =
                     Vector3.Lerp(from.Position, to.Position, t);
@@ -91,30 +93,28 @@ public class HistorySystem : MonoBehaviour
                 player.transform.rotation =
                     Quaternion.Slerp(from.Rotation, to.Rotation, t);
 
-                player.Health.SetHealth(
-                    Mathf.Lerp(from.Health, to.Health, t));
-
                 elapsed += Time.deltaTime;
 
                 yield return null;
             }
+
+            to.Apply(player);
         }
 
         history[0].Apply(player);
 
         controller.enabled = true;
 
+        if (player.RecallParticles != null)
+            player.RecallParticles.Stop();
+
         history.Clear();
 
         if (input != null)
             input.enabled = true;
 
-        if (player.RecallParticles != null)
-            player.RecallParticles.Stop();
-
         isRecalling = false;
     }
-
     public HistorySnapshot GetOldestSnapshot()
     {
         if (history.Count == 0)
