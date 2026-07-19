@@ -11,7 +11,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource recall;
     [SerializeField] private AudioSource hit;
     [SerializeField] private AudioSource voice;
-    [SerializeField] private AudioSource music;
     [SerializeField] private AudioSource reload;
 
     public void PlayBlink() => blink.Play();
