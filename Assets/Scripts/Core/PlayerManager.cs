@@ -16,6 +16,10 @@ public class PlayerManager : MonoBehaviour
 
     public AudioManager AudioManager;
 
+    [SerializeField] private ParticleSystem recallParticles;
+
+    public ParticleSystem RecallParticles => recallParticles;
+
     public HeroDefinition CurrentHero => Hero.CurrentHero;
     public MovementSettings Movement => Hero.Movement;
     public WeaponData Weapon => Hero.Weapon;
