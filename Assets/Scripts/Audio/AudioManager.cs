@@ -32,6 +32,7 @@ public class AudioManager : MonoBehaviour
     public void PlayRecall()
     {
         recall.PlayOneShot(recall.clip);
+        voice.PlayOneShot(voice.clip);
     }
 
     public void PlayShoot()
