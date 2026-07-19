@@ -75,6 +75,8 @@ public virtual void Initialize(PlayerManager manager)
     {
         isReloading = true;
 
+        playerManager.AudioManager.PlayReload();
+
         Debug.Log("Reloading...");
 
         yield return new WaitForSeconds(data.reloadTime);
