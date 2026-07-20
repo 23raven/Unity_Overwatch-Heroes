@@ -4,6 +4,8 @@ using System;
 public class Health : MonoBehaviour, IDamageable
 {
     [SerializeField] private float maxHealth = 100f;
+    public event Action<float, float> OnHealthChanged;
+    public float MaxHealth => maxHealth;
     public bool IsDead => CurrentHealth <= 0f;
 
     public float CurrentHealth { get; private set; }
@@ -12,6 +14,7 @@ public class Health : MonoBehaviour, IDamageable
     private void Awake()
     {
         CurrentHealth = maxHealth;
+        OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
     }
 
     public void TakeDamage(DamageInfo damageInfo)
@@ -19,6 +22,7 @@ public class Health : MonoBehaviour, IDamageable
         CurrentHealth -= damageInfo.Damage;
 
         damageInfo.Attacker?.UltimateCharge.Add(damageInfo.Damage);
+        OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
 
         if (CurrentHealth <= 0)
         {
@@ -30,6 +34,7 @@ public class Health : MonoBehaviour, IDamageable
     {
         CurrentHealth += amount;
         CurrentHealth = Mathf.Min(CurrentHealth, maxHealth);
+        OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
     }
 
     private void Die()
@@ -40,6 +45,7 @@ public class Health : MonoBehaviour, IDamageable
     public void SetHealth(float health)
     {
         CurrentHealth = Mathf.Clamp(health, 0f, maxHealth);
+        OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
 
         if (CurrentHealth <= 0)
         {
@@ -50,6 +56,7 @@ public class Health : MonoBehaviour, IDamageable
     public void ResetHealth()
     {
         CurrentHealth = maxHealth;
+        OnHealthChanged?.Invoke(CurrentHealth, maxHealth);
     }
 
 
