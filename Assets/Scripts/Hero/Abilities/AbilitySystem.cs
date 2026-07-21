@@ -42,7 +42,7 @@ public class AbilitySystem : MonoBehaviour
 
     private void HandleShift()
     {
-        if (!playerManager.Input.ShiftPressed)
+        if (!playerManager.Input.BlinkPressed)
             return;
 
         shiftSlot.Activate(playerManager);
@@ -65,10 +65,10 @@ public class AbilitySystem : MonoBehaviour
     }
 
     private void HandleSecondary() {
-        if (!playerManager.Input.UltimatePressed)
+        if (!playerManager.Input.BlinkPressed)
             return;
 
-        ultimateSlot.Activate(playerManager);
+        shiftSlot.Activate(playerManager);
     }
 
 }

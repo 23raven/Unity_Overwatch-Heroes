@@ -17,7 +17,9 @@ public class PlayerInput : MonoBehaviour
     private PlayerInputActions inputActions;
 
     public bool FireHeld => inputActions.Player.Fire.IsPressed();
-
+    public bool BlinkPressed =>
+    inputActions.Player.Shift.WasPressedThisFrame() ||
+    inputActions.Player.SecondaryAbility.WasPressedThisFrame();
     public bool ReloadPressed => inputActions.Player.Reload.WasPressedThisFrame();
 
     public bool ShiftPressed => inputActions.Player.Shift.WasPressedThisFrame();
