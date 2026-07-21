@@ -58,6 +58,10 @@ public virtual void Initialize(PlayerManager manager)
     {
         currentAmmo--;
         Debug.Log($"{CurrentAmmo}/{MagazineSize}");
+        if (currentAmmo <= 0)
+        {
+            Reload();
+        }
     }
 
     public void Reload()
