@@ -97,3 +97,5 @@ InitTestScene*.unity*
 
 # Auto-generated scenes by play mode tests
 /[Aa]ssets/[Ii]nit[Tt]est[Ss]cene*.unity*
+Assets/Imports/Plasma Guns Lite/Textures/Blue_Set_Clean/Plasma_SMG_Mat_Normal_OpenGL.png
+Assets/Imports/Plasma Guns Lite/Textures/Blue_Set_Dirty/Plasma_SMG_Mat_Normal_OpenGL.png
