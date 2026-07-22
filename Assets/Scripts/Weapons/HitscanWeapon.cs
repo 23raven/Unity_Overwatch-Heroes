@@ -6,6 +6,7 @@ public class HitscanWeapon : Weapon
     [SerializeField] private ParticleSystem muzzleFlash;
     [SerializeField] private ParticleSystem muzzleFlashTwo;
     [SerializeField] private ParticleSystem impactEffect;
+    [SerializeField] private ViewModelMotion viewModelMotion;
 
     public override void Shoot()
     {
@@ -27,6 +28,7 @@ public class HitscanWeapon : Weapon
         PlayMuzzleFlash();
         PlayImpactEffect(hit);
         DealDamage(hit);
+        viewModelMotion.PlayRecoil();
         InvokeShot();
     }
 

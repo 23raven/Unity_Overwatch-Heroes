@@ -7,6 +7,9 @@ public class PlayerCamera : MonoBehaviour
     [SerializeField] private float standingCameraHeight = 2.0f;
     [SerializeField] private float crouchingCameraHeight = 0.3f;
     [SerializeField] private float cameraLerpSpeed = 12f;
+    [SerializeField] private ViewModelMotion viewModelMotion;
+    private float previousYaw;
+    private float previousPitch;
     public Transform CameraHandle => cameraHandle;
 
     private float targetCameraHeight;
@@ -44,6 +47,14 @@ public class PlayerCamera : MonoBehaviour
         cameraHandle.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
 
         transform.Rotate(Vector3.up * mouseX);
+
+        float yawDelta = Mathf.DeltaAngle(previousYaw, transform.eulerAngles.y);
+        float pitchDelta = xRotation - previousPitch;
+
+        viewModelMotion.SetLookInput(new Vector2(yawDelta, pitchDelta));
+
+        previousYaw = transform.eulerAngles.y;
+        previousPitch = xRotation;
     }
 
     public void SetCrouch(bool crouching)
