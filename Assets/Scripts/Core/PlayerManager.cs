@@ -28,6 +28,9 @@ public class PlayerManager : MonoBehaviour
 
     [SerializeField] private BlinkUI blinkUI;
 
+    [SerializeField] private ParticleSystem blinkEffect;
+    public ParticleSystem BlinkEffect => blinkEffect;
+
     private void Awake()
     {
         Debug.Log("PlayerManager.isAwaking");

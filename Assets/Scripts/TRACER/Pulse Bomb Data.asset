@@ -20,3 +20,4 @@ MonoBehaviour:
   damage: 90
   radius: 10
   fuseTime: 3
+  explosionEffect: {fileID: 4891440538664600065, guid: 82066d902ed0dd6488ddfd32eb994801, type: 3}

@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "Hero/Abilities/Blink")]
@@ -7,9 +8,17 @@ public class Blink : HeroAbility
 
     public override void Activate(PlayerManager player)
     {
+        player.StartCoroutine(BlinkRoutine(player));
+    }
+
+    private IEnumerator BlinkRoutine(PlayerManager player)
+    {
         player.AudioManager.PlayBlink();
 
-        CharacterController controller = player.Controller;
+        if (player.BlinkEffect != null)
+        {
+            player.BlinkEffect.Play();
+        }
 
         Vector2 moveInput = player.Input.Move;
 
@@ -17,7 +26,6 @@ public class Blink : HeroAbility
             player.transform.forward * moveInput.y +
             player.transform.right * moveInput.x;
 
-        // Если игрок стоит на месте — Blink вперед
         if (direction.sqrMagnitude < 0.01f)
         {
             direction = player.transform.forward;
@@ -25,12 +33,12 @@ public class Blink : HeroAbility
 
         direction.Normalize();
 
-        // Временно отключаем CharacterController,
-        // чтобы избежать конфликтов при телепортации
+        yield return new WaitForSeconds(data.EffectDelay);
+
+        CharacterController controller = player.Controller;
+
         controller.enabled = false;
-
         player.transform.position += direction * data.Distance;
-
         controller.enabled = true;
     }
 
