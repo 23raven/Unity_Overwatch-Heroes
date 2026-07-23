@@ -6,6 +6,7 @@ public class HitscanWeapon : Weapon
     [SerializeField] private ParticleSystem muzzleFlash;
     [SerializeField] private ParticleSystem muzzleFlashTwo;
     [SerializeField] private ParticleSystem impactEffect;
+    [SerializeField] private ParticleSystem criticalImpactEffect;
     [SerializeField] private ViewModelMotion viewModelMotion;
 
     public override void Shoot()
@@ -25,14 +26,16 @@ public class HitscanWeapon : Weapon
 
         ConsumeAmmo();
 
+        Hitbox hitbox = hit.collider.GetComponent<Hitbox>();
+
         PlayMuzzleFlash();
-        PlayImpactEffect(hit);
-        DealDamage(hit);
+        PlayImpactEffect(hit, hitbox);
+        DealDamage(hit, hitbox);
         viewModelMotion.PlayRecoil();
         InvokeShot();
     }
 
-    private void DealDamage(RaycastHit hit)
+    private void DealDamage(RaycastHit hit, Hitbox hitbox)
     {
         IDamageable damageable = hit.collider.GetComponentInParent<IDamageable>();
 
@@ -41,12 +44,8 @@ public class HitscanWeapon : Weapon
 
         float damage = data.damage;
 
-        Hitbox hitbox = hit.collider.GetComponent<Hitbox>();
-
         if (hitbox != null)
-        {
             damage *= hitbox.DamageMultiplier;
-        }
 
         DamageInfo damageInfo = new DamageInfo(
             damage,
@@ -78,13 +77,20 @@ public class HitscanWeapon : Weapon
         muzzleFlashTwo.Play();
     }
 
-    private void PlayImpactEffect(RaycastHit hit)
+    private void PlayImpactEffect(RaycastHit hit, Hitbox hitbox)
     {
-        if (impactEffect == null)
+        ParticleSystem effect = impactEffect;
+
+        if (hitbox != null && hitbox.Critical)
+        {
+            effect = criticalImpactEffect;
+        }
+
+        if (effect == null)
             return;
 
         Instantiate(
-            impactEffect,
+            effect,
             hit.point,
             Quaternion.LookRotation(hit.normal));
     }

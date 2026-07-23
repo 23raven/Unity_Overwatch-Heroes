@@ -24130,6 +24130,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 356412880}
   muzzleFlashTwo: {fileID: 419925076}
   impactEffect: {fileID: 1623298396792479162, guid: 1468eeb0963ddad41909c04ad8af0aee, type: 3}
+  criticalImpactEffect: {fileID: 6651247000163292862, guid: ecb38e0319a6ad44cbca52d7b5add7a6, type: 3}
   viewModelMotion: {fileID: 2010908235}
 --- !u!1 &1927133728
 GameObject:

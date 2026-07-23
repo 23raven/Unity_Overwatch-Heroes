@@ -239,8 +239,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7664396521860246641}
-  - component: {fileID: 7504835055864689323}
   - component: {fileID: 307862254676605686}
+  - component: {fileID: 1679912243918950787}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -257,14 +257,28 @@ Transform:
   m_GameObject: {fileID: 6587774871516242295}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.1, y: 2.7, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 2304772823347645189}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &7504835055864689323
-CapsuleCollider:
+--- !u!114 &307862254676605686
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6587774871516242295}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83da4b7452326144a8e7e2698134c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hitbox
+  damageMultiplier: 3
+  critical: 1
+--- !u!135 &1679912243918950787
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -281,24 +295,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
+  serializedVersion: 3
   m_Radius: 0.3
-  m_Height: 0.5
-  m_Direction: 1
-  m_Center: {x: 0, y: 2.7, z: 0}
---- !u!114 &307862254676605686
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6587774871516242295}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d83da4b7452326144a8e7e2698134c68, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Hitbox
-  damageMultiplier: 3
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &7342807121122670989
 GameObject:
   m_ObjectHideFlags: 0
@@ -327,8 +326,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7342807121122670989}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -20, y: 0, z: -5}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -351,7 +350,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TrainingBot
   health: {fileID: 3646417009049275846}
   bodyHitbox: {fileID: 5333753549066884042}
-  headHitbox: {fileID: 7504835055864689323}
+  headHitbox: {fileID: 1679912243918950787}
   visuals: {fileID: 5164455741486728614}
   respawnDelay: 3
 --- !u!114 &3646417009049275846
@@ -403,6 +402,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Hitbox
   damageMultiplier: 1
+  critical: 0
 --- !u!1 &8536883510739374444
 GameObject:
   m_ObjectHideFlags: 0

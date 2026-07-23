@@ -9,7 +9,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6553377481844793004}
-  - component: {fileID: 1979115162306055840}
+  - component: {fileID: 812653613204047610}
+  - component: {fileID: 8944819891966991667}
   m_Layer: 0
   m_Name: Head
   m_TagString: Untagged
@@ -26,14 +27,14 @@ Transform:
   m_GameObject: {fileID: 2657846236326555553}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 2.7, z: 0.05}
+  m_LocalPosition: {x: 0, y: 2.54, z: 0.29}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 4416727506562322696}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!136 &1979115162306055840
-CapsuleCollider:
+--- !u!65 &812653613204047610
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -50,11 +51,23 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_ProvidesContacts: 0
   m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.25
-  m_Height: 0.5
-  m_Direction: 1
+  serializedVersion: 3
+  m_Size: {x: 0.3, y: 0.6, z: 0.8}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &8944819891966991667
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2657846236326555553}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83da4b7452326144a8e7e2698134c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hitbox
+  damageMultiplier: 3
+  critical: 1
 --- !u!1 &3204377840342594701
 GameObject:
   m_ObjectHideFlags: 0
@@ -260,6 +273,7 @@ GameObject:
   - component: {fileID: 4527299322955637641}
   - component: {fileID: 539843338428180753}
   - component: {fileID: 504963555333593095}
+  - component: {fileID: 3500675459649017673}
   m_Layer: 0
   m_Name: WalkingBot
   m_TagString: Untagged
@@ -275,8 +289,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6911456810982942675}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -19.38, y: 0, z: -19.88}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -312,7 +326,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::WalkingBot
   health: {fileID: 4527299322955637641}
   bodyHitbox: {fileID: 504963555333593095}
-  headHitbox: {fileID: 1979115162306055840}
+  headHitbox: {fileID: 812653613204047610}
   visuals: {fileID: 3174449940597598577}
   respawnDelay: 3
   waypoints:
@@ -340,9 +354,23 @@ CapsuleCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Radius: 0.5
-  m_Height: 2.5
+  m_Height: 2.2
   m_Direction: 1
   m_Center: {x: 0, y: 1.2, z: 0}
+--- !u!114 &3500675459649017673
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6911456810982942675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d83da4b7452326144a8e7e2698134c68, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Hitbox
+  damageMultiplier: 1
+  critical: 0
 --- !u!1 &7916490983028417378
 GameObject:
   m_ObjectHideFlags: 0
