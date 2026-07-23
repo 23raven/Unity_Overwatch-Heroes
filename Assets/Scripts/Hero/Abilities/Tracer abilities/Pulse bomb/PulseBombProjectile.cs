@@ -55,6 +55,14 @@ public class PulseBombProjectile : Projectile
     private void Explode()
     {
 
+        if (data.ExplosionEffect != null)
+        {
+            Instantiate(
+                data.ExplosionEffect,
+                transform.position,
+                Quaternion.identity);
+        }
+
         owner.AudioManager.PlayExplosion();
 
         Explosion.Explode(

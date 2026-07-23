@@ -13,6 +13,10 @@ public class PulseBombData : AbilityData
     [SerializeField] private float radius = 3f;
     [SerializeField] private float fuseTime = 1f;
 
+    [SerializeField] private ParticleSystem explosionEffect;
+
+    public ParticleSystem ExplosionEffect => explosionEffect;
+
     public PulseBombProjectile ProjectilePrefab => projectilePrefab;
     public float Speed => speed;
     public float Lifetime => lifetime;
