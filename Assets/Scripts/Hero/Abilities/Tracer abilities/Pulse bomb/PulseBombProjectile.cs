@@ -55,6 +55,8 @@ public class PulseBombProjectile : Projectile
     private void Explode()
     {
 
+        owner.AudioManager.PlayExplosion();
+
         Explosion.Explode(
             transform.position,
             data.Radius,

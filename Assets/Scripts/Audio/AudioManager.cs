@@ -13,6 +13,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource voice;
     [SerializeField] private AudioSource reload;
     [SerializeField] private AudioSource critical;
+    [SerializeField] private AudioSource explosion;
 
     public void PlayBlink() => blink.Play();
 
@@ -22,6 +23,10 @@ public class AudioManager : MonoBehaviour
 
     private Coroutine shootFadeCoroutine;
 
+    public void PlayExplosion()
+    {
+        explosion.PlayOneShot(explosion.clip);
+    }
 
     public void PlayReload()
     {

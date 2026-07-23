@@ -10,6 +10,7 @@ public class PulseBomb : HeroAbility
         if (!player.UltimateCharge.TryConsume())
             return;
 
+
         Transform camera = player.Camera.CameraHandle;
 
         Vector3 spawnPosition =
