@@ -53,7 +53,12 @@ public class HitscanWeapon : Weapon
 
         damageable.TakeDamage(damageInfo);
 
-        playerManager.AudioManager.PlayHit();
+        
+
+        if (hitbox != null && hitbox.Critical)
+        {
+            playerManager.AudioManager.PlayCritical();
+        }else playerManager.AudioManager.PlayHit();
     }
 
     private void PlayMuzzleFlash()

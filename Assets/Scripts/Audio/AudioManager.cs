@@ -12,11 +12,11 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource hit;
     [SerializeField] private AudioSource voice;
     [SerializeField] private AudioSource reload;
+    [SerializeField] private AudioSource critical;
 
     public void PlayBlink() => blink.Play();
 
     public void StopBlink() => blink.Stop();
-
 
     public void StopRecall() => recall.Stop();
 
@@ -119,5 +119,10 @@ public class AudioManager : MonoBehaviour
     public void PlayHit()
     {
         hit.Play();
+    }
+
+    public void PlayCritical()
+    {
+        critical.PlayOneShot(critical.clip);
     }
 }
